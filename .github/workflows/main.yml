@@ -57,9 +57,11 @@ jobs:
         run: |
           git config --global user.email jimmymall@live.com
           git config --global user.name jimmy
-          git add .
-          git commit -m 'action: `date`'
-          git pull --rebase
+          if [ -n "$(git status -s)" ];then
+              git add .
+              git commit -m 'action: `date`'
+              git pull --rebase
+          fi
 
       - name: Push changes
         uses: ad-m/github-push-action@master
